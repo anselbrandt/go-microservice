@@ -56,7 +56,7 @@ func main() {
 	getR.Handle("/docs", sh)
 	getR.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
-	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"http://localhost:3000"}))
+	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"http://localhost:3000", "https://anselbrandt.dev", "https://www.anselbrandt.dev"}))
 
 	// create a new server
 	s := http.Server{
