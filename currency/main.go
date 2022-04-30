@@ -5,7 +5,7 @@ import (
 	"net"
 	"os"
 
-	protos "currency/protos/currency"
+	protos "currency/protos"
 	"currency/server"
 
 	"github.com/hashicorp/go-hclog"
