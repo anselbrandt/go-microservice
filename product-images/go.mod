@@ -1,4 +1,4 @@
-module product-images
+module github.com/anselbrandt/go-microservice/product-images
 
 go 1.18
 

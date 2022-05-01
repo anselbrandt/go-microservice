@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"time"
 
-	"product-images/env"
-	"product-images/files"
-	"product-images/handlers"
+	"github.com/anselbrandt/go-microservice/product-images/env"
+	"github.com/anselbrandt/go-microservice/product-images/files"
+	"github.com/anselbrandt/go-microservice/product-images/handlers"
 
 	"github.com/gorilla/mux"
 	hclog "github.com/hashicorp/go-hclog"

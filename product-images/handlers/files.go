@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"product-images/files"
+	"github.com/anselbrandt/go-microservice/product-images/files"
 
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-hclog"
