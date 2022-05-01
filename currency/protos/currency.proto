@@ -12,5 +12,5 @@ message RateRequest {
 }
 
 message RateResponse {
-    float rate = 1;
+    float rate = 1 [json_name="rate"];
 }
