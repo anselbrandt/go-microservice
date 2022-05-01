@@ -7,7 +7,7 @@ import (
 	"net"
 	"os"
 
-	protos "currency/protos"
+	protos "github.com/anselbrandt/go-microservice/currency/protos"
 
 	"github.com/hashicorp/go-hclog"
 	"google.golang.org/grpc"

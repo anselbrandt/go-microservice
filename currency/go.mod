@@ -1,4 +1,4 @@
-module currency
+module github.com/anselbrandt/go-microservice/currency
 
 go 1.18
 
