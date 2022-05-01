@@ -1,41 +1,45 @@
 package main
 
 import (
+	"context"
+	"flag"
 	"fmt"
 	"net"
 	"os"
 
 	protos "currency/protos"
-	"currency/server"
 
 	"github.com/hashicorp/go-hclog"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
+var (
+	port = flag.Int("port", 9092, "The server port")
+	log  = hclog.Default()
+)
+
+type server struct {
+	protos.UnimplementedCurrencyServer
+}
+
+func (s *server) GetRate(ctx context.Context, rr *protos.RateRequest) (*protos.RateResponse, error) {
+	log.Info("Handle request for GetRate", "base", rr.GetBase(), "dest", rr.GetDestination())
+	return &protos.RateResponse{Rate: 0.5}, nil
+}
+
 func main() {
-	log := hclog.Default()
-
-	// create a new gRPC server, use WithInsecure to allow http connections
-	gs := grpc.NewServer()
-
-	// create an instance of the Currency server
-	c := server.NewCurrency(log)
-
-	// register the currency server
-	protos.RegisterCurrencyServer(gs, c)
-
-	// register the reflection service which allows clients to determine the methods
-	// for this gRPC service
-	reflection.Register(gs)
-
-	// create a TCP socket for inbound server connections
-	l, err := net.Listen("tcp", fmt.Sprintf(":%d", 9092))
+	flag.Parse()
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		log.Error("Unable to create listener", "error", err)
 		os.Exit(1)
 	}
+	gs := grpc.NewServer()
 
-	// listen for requests
-	gs.Serve(l)
+	protos.RegisterCurrencyServer(gs, &server{})
+
+	reflection.Register(gs)
+
+	gs.Serve(lis)
 }
