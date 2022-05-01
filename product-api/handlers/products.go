@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/anselbrandt/go-microservice/product-api/data"
 	"github.com/gorilla/mux"
-	"product-api/data"
 )
 
 // KeyProduct is a key used for the Product object in the context

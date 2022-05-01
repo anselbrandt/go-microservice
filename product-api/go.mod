@@ -1,10 +1,10 @@
-module product-api
+module github.com/anselbrandt/go-microservice/product-api
 
 go 1.18
 
 require (
 	github.com/go-openapi/errors v0.20.2
-	github.com/go-openapi/runtime v0.23.3
+	github.com/go-openapi/runtime v0.24.0
 	github.com/go-openapi/strfmt v0.21.2
 	github.com/go-openapi/swag v0.21.1
 	github.com/go-openapi/validate v0.21.0
@@ -22,7 +22,7 @@ require (
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.20.0 // indirect
 	github.com/go-openapi/loads v0.21.1 // indirect
-	github.com/go-openapi/spec v0.20.5 // indirect
+	github.com/go-openapi/spec v0.20.6 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-stack/stack v1.8.1 // indirect

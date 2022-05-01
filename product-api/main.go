@@ -10,9 +10,9 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 
-	"product-api/data"
-	"product-api/env"
-	"product-api/handlers"
+	"github.com/anselbrandt/go-microservice/product-api/data"
+	"github.com/anselbrandt/go-microservice/product-api/env"
+	"github.com/anselbrandt/go-microservice/product-api/handlers"
 
 	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"

@@ -15,7 +15,7 @@
 // swagger:meta
 package handlers
 
-import "product-api/data"
+import "github.com/anselbrandt/go-microservice/product-api/data"
 
 //
 // NOTE: Types defined here are purely for documentation purposes
