@@ -7,6 +7,8 @@ import (
 	"net"
 	"os"
 
+	"github.com/anselbrandt/go-microservice/currency/data"
+
 	protos "github.com/anselbrandt/go-microservice/currency/protos"
 
 	"github.com/hashicorp/go-hclog"
@@ -19,13 +21,25 @@ var (
 	log  = hclog.Default()
 )
 
-type server struct {
+type Currency struct {
 	protos.UnimplementedCurrencyServer
+	rates *data.ExchangeRates
+	log   hclog.Logger
 }
 
-func (s *server) GetRate(ctx context.Context, rr *protos.RateRequest) (*protos.RateResponse, error) {
+// NewCurrency creates a new Currency server
+func NewCurrency(p protos.UnimplementedCurrencyServer, r *data.ExchangeRates, l hclog.Logger) *Currency {
+	return &Currency{p, r, l}
+}
+
+func (c *Currency) GetRate(ctx context.Context, rr *protos.RateRequest) (*protos.RateResponse, error) {
 	log.Info("Handle request for GetRate", "base", rr.GetBase(), "dest", rr.GetDestination())
-	return &protos.RateResponse{Rate: 0.5}, nil
+	rate, err := c.rates.GetRate(rr.GetBase().String(), rr.GetDestination().String())
+	if err != nil {
+		return nil, err
+	}
+
+	return &protos.RateResponse{Rate: rate}, nil
 }
 
 func main() {
@@ -37,7 +51,7 @@ func main() {
 	}
 	gs := grpc.NewServer()
 
-	protos.RegisterCurrencyServer(gs, &server{})
+	protos.RegisterCurrencyServer(gs, &Currency{})
 
 	reflection.Register(gs)
 
